@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ClienteUsina {
+  id         Int      @id(map: "cliente_usina_pkey") @default(autoincrement())
+  id_cliente Int
+  id_usina   String
+  Clientes   Clientes @relation(fields: [id_cliente], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cliente_usina_id_cliente_fkey")
+  Usinas     Usinas   @relation(fields: [id_usina], references: [id_usina], onDelete: Cascade, onUpdate: NoAction, map: "cliente_usina_id_usina_fkey")
+
+  @@unique([id_cliente, id_usina], map: "cliente_usina_id_cliente_id_usina_key")
+}
+
+model Clientes {
+  id           Int            @id(map: "clientes_pkey") @default(autoincrement())
+  nome         String
+  email        String         @unique(map: "clientes_email_key")
+  telefone     String?
+  cpf_cnpj     String         @unique(map: "clientes_cpf_cnpj_key")
+  razao_social String?
+  ClienteUsina ClienteUsina[]
+}
+
+model InquilinoUsina {
+  id_usina     String     @id(map: "inquilino_usina_pkey")
+  id_inquilino String
+  Inquilinos   Inquilinos @relation(fields: [id_inquilino], references: [id_inquilino], onDelete: Cascade, onUpdate: NoAction, map: "inquilino_usina_id_inquilino_fkey")
+  Usinas       Usinas     @relation(fields: [id_usina], references: [id_usina], onDelete: Cascade, onUpdate: NoAction, map: "inquilino_usina_id_usina_fkey")
+}
+
+model Inquilinos {
+  id             Int              @id(map: "inquilinos_pkey") @default(autoincrement())
+  id_inquilino   String           @unique(map: "inquilinos_inquilino_id_key")
+  nome           String
+  email          String?
+  telefone       String?
+  cpf_cnpj       String?
+  razao_social   String?
+  responsavel    String?
+  cep            String?
+  InquilinoUsina InquilinoUsina[]
+}
+
+model Usinas {
+  id             Int             @id(map: "usinas_pkey") @default(autoincrement())
+  id_usina       String          @unique(map: "usinas_usinaid_key")
+  investimento   Decimal?        @db.Decimal
+  nome           String
+  email          String?
+  telefone       String?
+  cpf_cnpj       String?
+  razao_social   String?
+  ClienteUsina   ClienteUsina[]
+  InquilinoUsina InquilinoUsina?
+}
+
+model Usuarios {
+  id                  Int                   @id(map: "usuarios_pkey") @default(autoincrement())
+  id_usuario          String?
+  nome                String?
+  email               String?
+  telefone            String?
+  cpf_cnpj            String?
+  razao_social        String?
+  investimento        Decimal?              @db.Decimal
+  responsavel         String?
+  cep                 String?
+  tipo                String?
+  ControleFaturamento ControleFaturamento[]
+}
+
+model ControleFaturamento {
+  id                             Int       @id(map: "controlefaturamento_pkey") @default(autoincrement())
+  id_usuario                     Int?
+  mes                            String?
+  leitura_1                      String?
+  leitura_2                      String?
+  mes_ref                        String?
+  kwh_injectado                  Decimal?  @db.Decimal
+  kwh_minimo                     Decimal?  @db.Decimal
+  kwh_ativo                      Decimal?  @db.Decimal
+  economia                       Decimal?  @db.Decimal
+  tarifa_tusd                    Decimal?  @db.Decimal
+  tarifa_te_fv                   Decimal?  @db.Decimal
+  total_tarifas_fv               Decimal?  @db.Decimal
+  total_creditado                Decimal?  @db.Decimal
+  cred_adc_band_tarifaria        Decimal?  @db.Decimal
+  contrib_custeio_ip_cip         Decimal?  @db.Decimal
+  cpfl_inquilino                 Decimal?  @db.Decimal
+  incentivo_inquilino_investidor Decimal?  @db.Decimal
+  minimo_investidor              Decimal?  @db.Decimal
+  inquilino_pagar                Decimal?  @db.Decimal
+  taxa_adm_soluttion             Decimal?  @db.Decimal
+  investidor_receber             Decimal?  @db.Decimal
+  credito_debito                 Decimal?  @db.Decimal
+  saldo_banco_anterior           Decimal?  @db.Decimal
+  saldo_banco_atual              Decimal?  @db.Decimal
+  observacao                     String?
+  mes_contrato_soluttion         String?
+  Usuarios                       Usuarios? @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usuario")
+}
