@@ -1,5 +1,6 @@
 # Passo a passo para execução do projeto
 - Já dentro do projeto, execute npm install pra instalar as dependências
+- Configure as váriaveis de ambiente criando um arquivo ".env" e coloca as váriaveis de acordo com o arquivo ".env.example"
 - Execute npx prisma generate, para atualizar as tipagens do Prisma
 - Execute npm run test, garanta que todos os testes passem
 - Para iniciar o projeto em ambiente de desenvolvimento, execute npm run dev
