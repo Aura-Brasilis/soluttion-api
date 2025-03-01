@@ -4,7 +4,8 @@ export interface BillingControlRepository {
   create(
     data:
       | {
-          id_usuario?: number
+          id_usina?: number
+          id_inquilino?: number
         }
       | Prisma.ControleFaturamentoCreateInput,
   ): Promise<ControleFaturamento>
@@ -14,7 +15,8 @@ export interface BillingControlRepository {
   update(
     data:
       | {
-          id_usuario?: number
+          id_usina?: number
+          id_inquilino?: number
         }
       | Partial<Prisma.ControleFaturamentoCreateInput>,
   ): Promise<ControleFaturamento>
