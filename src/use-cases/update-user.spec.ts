@@ -15,6 +15,7 @@ describe('Update users use case', () => {
   it('should be able to update a user', async () => {
     const userId = 1
     const userName = 'Test user'
+    const cepUpdate = '456'
 
     const data = {
       id: userId,
@@ -35,12 +36,12 @@ describe('Update users use case', () => {
     const { user } = await sut.execute({
       data: {
         ...data,
-        cep: '456',
+        cep: cepUpdate,
       },
     })
 
     expect(user.id).toBe(1)
-    expect(user.cep).toBe('456')
+    expect(user.cep).toBe(cepUpdate)
     expect(user.nome).toBe(userName)
   })
 
