@@ -10,7 +10,6 @@ export interface BillingControlRepository {
       | Prisma.ControleFaturamentoCreateInput,
   ): Promise<ControleFaturamento>
   findById(billingControlId: number): Promise<ControleFaturamento | null>
-  findAllByUserId(userId: number): Promise<ControleFaturamento[]>
   findAll(): Promise<ControleFaturamento[]>
   update(
     data:
@@ -21,5 +20,4 @@ export interface BillingControlRepository {
       | Partial<Prisma.ControleFaturamentoCreateInput>,
   ): Promise<ControleFaturamento>
   delete(billingControlId: number): Promise<boolean>
-  deleteByUserId(userId: number): Promise<boolean>
 }

@@ -10,7 +10,8 @@ export class InMemoryBillingControlRepository
   async create(data: ControleFaturamento) {
     const billingControl: ControleFaturamento = {
       id: randomInt(999999),
-      id_usuario: data.id_usuario,
+      id_inquilino: data.id_inquilino,
+      id_usina: data.id_usina,
       contrib_custeio_ip_cip: data.contrib_custeio_ip_cip,
       cpfl_inquilino: data.cpfl_inquilino,
       cred_adc_band_tarifaria: data.cred_adc_band_tarifaria,
@@ -20,7 +21,7 @@ export class InMemoryBillingControlRepository
       inquilino_pagar: data.inquilino_pagar,
       investidor_receber: data.investidor_receber,
       kwh_ativo: data.kwh_ativo,
-      kwh_injectado: data.kwh_injectado,
+      kwh_injetado: data.kwh_injetado,
       kwh_minimo: data.kwh_minimo,
       leitura_1: data.leitura_1,
       leitura_2: data.leitura_2,
@@ -31,7 +32,7 @@ export class InMemoryBillingControlRepository
       saldo_banco_anterior: data.saldo_banco_anterior,
       saldo_banco_atual: data.saldo_banco_atual,
       tarifa_te_fv: data.tarifa_te_fv,
-      tarifa_tusd: data.tarifa_tusd,
+      tarifa_tusd_fv: data.tarifa_tusd_fv,
       taxa_adm_soluttion: data.taxa_adm_soluttion,
       total_creditado: data.total_creditado,
       total_tarifas_fv: data.total_tarifas_fv,
@@ -51,12 +52,6 @@ export class InMemoryBillingControlRepository
     return billingControl
   }
 
-  async findAllByUserId(userId: number) {
-    const billingControl = this.items.filter((i) => i.id_usuario === userId)
-
-    return billingControl
-  }
-
   async findAll() {
     return this.items
   }
@@ -69,16 +64,6 @@ export class InMemoryBillingControlRepository
     }
 
     return this.items[billingControlIndex]
-  }
-
-  async deleteByUserId(userId: number) {
-    const founded = this.items.find((i) => i.id_usuario === userId)
-
-    if (!founded) return false
-
-    this.items = this.items.filter((i) => i.id_usuario !== userId)
-
-    return true
   }
 
   async delete(id: number) {
