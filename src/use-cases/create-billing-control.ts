@@ -2,7 +2,8 @@ import { ControleFaturamento } from '@prisma/client'
 import { BillingControlRepository } from '../repositories/billing-control-repository'
 
 interface CreateBillingControlUseCaseRequest {
-  idUsuario: number
+  idUsina: number
+  idInquilino: number
   contribCusteioIpCip: number
   cpflInquilino: number
   credAdcBandTarifaria: number
@@ -12,7 +13,7 @@ interface CreateBillingControlUseCaseRequest {
   inquilinoPagar: number
   investidorReceber: number
   kwhAtivo: number
-  kwhInjectado: number
+  kwhInjetado: number
   kwhMinimo: number
   leitura1: string
   leitura2: string
@@ -23,7 +24,7 @@ interface CreateBillingControlUseCaseRequest {
   saldoBancoAnterior: number
   saldoBancoAtual: number
   tarifaTeFv: number
-  tarifaTusd: number
+  tarifaTusdFv: number
   taxaAdmSoluttion: number
   totalCreditado: number
   totalTarifasFv: number
@@ -43,12 +44,13 @@ export class CreateBillingControlUseCase {
     credAdcBandTarifaria,
     creditoDebito,
     economia,
-    idUsuario,
+    idUsina,
+    idInquilino,
     incentivoInquilinoInvestidor,
     inquilinoPagar,
     investidorReceber,
     kwhAtivo,
-    kwhInjectado,
+    kwhInjetado,
     kwhMinimo,
     leitura1,
     leitura2,
@@ -60,13 +62,14 @@ export class CreateBillingControlUseCase {
     saldoBancoAnterior,
     saldoBancoAtual,
     tarifaTeFv,
-    tarifaTusd,
+    tarifaTusdFv,
     taxaAdmSoluttion,
     totalCreditado,
     totalTarifasFv,
   }: CreateBillingControlUseCaseRequest): Promise<CreateBillingControlUseCaseResponse> {
     const billingControl = await this.billingControlRepository.create({
-      id_usuario: idUsuario,
+      id_usina: idUsina,
+      id_inquilino: idInquilino,
       contrib_custeio_ip_cip: contribCusteioIpCip,
       cpfl_inquilino: cpflInquilino,
       cred_adc_band_tarifaria: credAdcBandTarifaria,
@@ -75,7 +78,7 @@ export class CreateBillingControlUseCase {
       inquilino_pagar: inquilinoPagar,
       investidor_receber: investidorReceber,
       kwh_ativo: kwhAtivo,
-      kwh_injectado: kwhInjectado,
+      kwh_injetado: kwhInjetado,
       kwh_minimo: kwhMinimo,
       leitura_1: leitura1,
       leitura_2: leitura2,
@@ -85,7 +88,7 @@ export class CreateBillingControlUseCase {
       saldo_banco_anterior: saldoBancoAnterior,
       saldo_banco_atual: saldoBancoAtual,
       tarifa_te_fv: tarifaTeFv,
-      tarifa_tusd: tarifaTusd,
+      tarifa_tusd_fv: tarifaTusdFv,
       taxa_adm_soluttion: taxaAdmSoluttion,
       total_creditado: totalCreditado,
       total_tarifas_fv: totalTarifasFv,
