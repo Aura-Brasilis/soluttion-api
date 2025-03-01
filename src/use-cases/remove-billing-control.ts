@@ -1,20 +1,20 @@
 import { BillingControlRepository } from '../repositories/billing-control-repository'
 import { BillingControlFoundError } from './errors/billing-control-not-found'
 
-interface CreateBillingControlUseCaseRequest {
+interface RemoveBillingControlUseCaseRequest {
   billingControlId: number
 }
 
-interface CreateBillingControlUseCaseResponse {
+interface RemoveBillingControlUseCaseResponse {
   success: boolean
 }
 
-export class CreateBillingControlUseCase {
+export class RemoveBillingControlUseCase {
   constructor(private billingControlRepository: BillingControlRepository) {}
 
   async execute({
     billingControlId,
-  }: CreateBillingControlUseCaseRequest): Promise<CreateBillingControlUseCaseResponse> {
+  }: RemoveBillingControlUseCaseRequest): Promise<RemoveBillingControlUseCaseResponse> {
     const billingControl =
       await this.billingControlRepository.findById(billingControlId)
 
