@@ -28,11 +28,24 @@ export class PrismaUsersRepository implements UsersRepository {
   }
 
   async update(data: Usuarios) {
+    const dataToUpdate = {
+      cep: data.cep,
+      cpf_cnpj: data.cpf_cnpj,
+      email: data.email,
+      id_usuario: data.id_usuario,
+      investimento: data.investimento,
+      nome: data.nome,
+      razao_social: data.razao_social,
+      responsavel: data.responsavel,
+      telefone: data.telefone,
+      tipo: data.tipo,
+    }
+
     const user = await prisma.usuarios.update({
       where: {
         id: data.id,
       },
-      data,
+      data: dataToUpdate,
     })
 
     return user
