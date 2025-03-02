@@ -30,7 +30,7 @@ payload:
   cep: string,
 }
 ```
-- PUT /users/update (faz atualização de um usuário)
+- PUT /users/update (faz atualização de um usuário, todos os campos são opicionais)
 ```
 payload:
 {
@@ -52,7 +52,7 @@ payload:
 - DELETE /users/remove/:userId (deleta um usuário)
 
 ## Billing controls (Controle faturamento)
-- POST /billing-controls/create (cria um usuário)
+- POST /billing-controls/create (cria um controle de faturamento)
 ```
 payload:
 {
@@ -85,7 +85,7 @@ payload:
     mesContratoSoluttion: string
 }
 ```
-- PUT /billing-controls/update (faz atualização de um usuário)
+- PUT /billing-controls/update (faz atualização de um controle de faturamento, todos os campos são opicionais)
 ```
 payload:
 {
@@ -119,6 +119,6 @@ payload:
     mesContratoSoluttion: string
 }
 ```
-- GET /billing-controls/get/:billingControlId (busca um usuário)
-- GET /billing-controls/list (busca todos os usuários registrados)
-- DELETE /billing-controls/remove/:billingControlId (deleta um usuário)
+- GET /billing-controls/get/:billingControlId (busca um controle de faturamento)
+- GET /billing-controls/list (busca todos os controles de faturamentos registrados)
+- DELETE /billing-controls/remove/:billingControlId (deleta um controle de faturamento)
