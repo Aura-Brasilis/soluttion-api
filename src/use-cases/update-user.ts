@@ -3,7 +3,19 @@ import { UsersRepository } from '../repositories/users-repository'
 import { UserNotFoundError } from './errors/user-not-found'
 
 interface UpdateUserUseCaseRequest {
-  data: Usuarios
+  data: {
+    id: number
+    cep?: string
+    email?: string
+    cpfCnpj?: string
+    idUsuario?: string
+    investimento?: number | null
+    nome?: string
+    razaoSocial?: string
+    responsavel?: string
+    telefone?: string
+    tipo?: string
+  }
 }
 
 interface UpdateUserUseCaseResponse {
