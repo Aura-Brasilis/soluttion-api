@@ -11,3 +11,33 @@
 - npm run start -> Inicia a API pela pasta "build" que o comando "npm run build" gera
 - npm run dev -> Inicia a API em ambiente de desenvolvimento
 - npm run test -> Executa os testes dos use cases do projeto
+
+# Rotas
+- POST /users/create payload {
+  idUsuario: string,
+  cpfCnpj: string,
+  email: string,
+  nome: string,
+  investimento: number,
+  responsavel: string,
+  tipo: string,
+  razaoSocial: string,
+  telefone: string,
+  cep: string,
+} (cria um usuário)
+- PUT /users/update payload {
+  id: number,
+  idUsuario: string,
+  cpfCnpj: string,
+  email: string,
+  nome: string,
+  investimento: number,
+  responsavel: string,
+  tipo: string,
+  razaoSocial: string,
+  telefone: string,
+  cep: string,
+} (faz atualização de um usuário)
+- GET /users/get/:userId (busca um usuário)
+- GET /users/list (busca todos os usuários registrados)
+- DELETE /users/remove/:userId (deleta um usuário)
