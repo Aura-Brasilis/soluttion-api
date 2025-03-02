@@ -13,7 +13,7 @@
 - npm run test -> Executa os testes dos use cases do projeto
 
 # Rotas
-- POST /users/create payload {
+- POST /users/create """ payload {
   idUsuario: string,
   cpfCnpj: string,
   email: string,
@@ -24,7 +24,7 @@
   razaoSocial: string,
   telefone: string,
   cep: string,
-} (cria um usuário)
+} """ (cria um usuário)
 - PUT /users/update payload {
   id: number,
   idUsuario: string,
