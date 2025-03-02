@@ -34,7 +34,21 @@ export class UpdateUserUseCase {
       throw new UserNotFoundError()
     }
 
-    const updatedUser = await this.usersRepository.update(data)
+    const dataToUpdate = {
+      id: data.id,
+      cep: data.cep,
+      cpf_cnpj: data.cpfCnpj,
+      email: data.email,
+      id_usuario: data.idUsuario,
+      investimento: data.investimento,
+      nome: data.nome,
+      razao_social: data.razaoSocial,
+      responsavel: data.responsavel,
+      telefone: data.telefone,
+      tipo: data.tipo,
+    }
+
+    const updatedUser = await this.usersRepository.update(dataToUpdate)
 
     return { user: updatedUser }
   }
