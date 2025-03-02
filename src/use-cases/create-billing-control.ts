@@ -5,28 +5,28 @@ interface CreateBillingControlUseCaseRequest {
   idUsina: number
   idInquilino: number
   contribCusteioIpCip: number
-  cpflInquilino: number
+  cpflInquilino: number | null
   credAdcBandTarifaria: number
   creditoDebito: number
-  economia: number
-  incentivoInquilinoInvestidor: number
-  inquilinoPagar: number
-  investidorReceber: number
-  kwhAtivo: number
+  economia: number | null
+  incentivoInquilinoInvestidor: number | null
+  inquilinoPagar: number | null
+  investidorReceber: number | null
+  kwhAtivo: number | null
   kwhInjetado: number
   kwhMinimo: number
-  leitura1: string
-  leitura2: string
+  leitura1: string | null
+  leitura2: string | null
   mes: string
-  mesRef: string
+  mesRef: string | null
   minimoInvestidor: number
-  observacao: string
+  observacao: string | null
   saldoBancoAnterior: number
-  saldoBancoAtual: number
+  saldoBancoAtual: number | null
   tarifaTeFv: number
   tarifaTusdFv: number
-  taxaAdmSoluttion: number
-  totalCreditado: number
+  taxaAdmSoluttion: number | null
+  totalCreditado: number | null
   totalTarifasFv: number
   mesContratoSoluttion: string
 }
