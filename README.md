@@ -13,7 +13,11 @@
 - npm run test -> Executa os testes dos use cases do projeto
 
 # Rotas
-- POST /users/create """ payload {
+## Users
+- POST /users/create (cria um usuário)
+```
+payload:
+{
   idUsuario: string,
   cpfCnpj: string,
   email: string,
@@ -24,8 +28,12 @@
   razaoSocial: string,
   telefone: string,
   cep: string,
-} """ (cria um usuário)
-- PUT /users/update payload {
+}
+```
+- PUT /users/update (faz atualização de um usuário)
+```
+payload:
+{
   id: number,
   idUsuario: string,
   cpfCnpj: string,
@@ -37,7 +45,8 @@
   razaoSocial: string,
   telefone: string,
   cep: string,
-} (faz atualização de um usuário)
+}
+```
 - GET /users/get/:userId (busca um usuário)
 - GET /users/list (busca todos os usuários registrados)
 - DELETE /users/remove/:userId (deleta um usuário)
