@@ -1,3 +1,4 @@
+import { BillingControlFoundError } from '@/use-cases/errors/billing-control-not-found'
 import { makeUpdateBillingControlUseCase } from '@/use-cases/factories/make-update-billing-control-use-case'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
@@ -65,40 +66,46 @@ export async function update(req: FastifyRequest, res: FastifyReply) {
     totalTarifasFv,
   } = updateBodySchema.parse(req.body)
 
-  const updateUserUseCase = makeUpdateBillingControlUseCase()
+  try {
+    const updateUserUseCase = makeUpdateBillingControlUseCase()
 
-  const { billingControl } = await updateUserUseCase.execute({
-    data: {
-      id,
-      contribCusteioIpCip,
-      cpflInquilino,
-      credAdcBandTarifaria,
-      creditoDebito,
-      economia,
-      idInquilino,
-      idUsina,
-      incentivoInquilinoInvestidor,
-      inquilinoPagar,
-      investidorReceber,
-      kwhAtivo,
-      kwhInjetado,
-      kwhMinimo,
-      leitura1,
-      leitura2,
-      mes,
-      mesContratoSoluttion,
-      mesRef,
-      minimoInvestidor,
-      observacao,
-      saldoBancoAnterior,
-      saldoBancoAtual,
-      tarifaTeFv,
-      tarifaTusdFv,
-      taxaAdmSoluttion,
-      totalCreditado,
-      totalTarifasFv,
-    },
-  })
+    const { billingControl } = await updateUserUseCase.execute({
+      data: {
+        id,
+        contribCusteioIpCip,
+        cpflInquilino,
+        credAdcBandTarifaria,
+        creditoDebito,
+        economia,
+        idInquilino,
+        idUsina,
+        incentivoInquilinoInvestidor,
+        inquilinoPagar,
+        investidorReceber,
+        kwhAtivo,
+        kwhInjetado,
+        kwhMinimo,
+        leitura1,
+        leitura2,
+        mes,
+        mesContratoSoluttion,
+        mesRef,
+        minimoInvestidor,
+        observacao,
+        saldoBancoAnterior,
+        saldoBancoAtual,
+        tarifaTeFv,
+        tarifaTusdFv,
+        taxaAdmSoluttion,
+        totalCreditado,
+        totalTarifasFv,
+      },
+    })
 
-  return res.status(200).send({ billingControl })
+    return res.status(200).send({ billingControl })
+  } catch (err) {
+    if (err instanceof BillingControlFoundError) {
+      return res.status(404).send({ msg: err.message })
+    }
+  }
 }
