@@ -30,7 +30,7 @@ payload:
   cep: string,
 }
 ```
-- PUT /users/update (faz atualização de um usuário, todos os campos são opicionais)
+- PUT /users/update (faz atualização de um usuário, todos os campos são opicionais com exceção do "id")
 ```
 payload:
 {
@@ -85,7 +85,7 @@ payload:
     mesContratoSoluttion: string
 }
 ```
-- PUT /billing-controls/update (faz atualização de um controle de faturamento, todos os campos são opicionais)
+- PUT /billing-controls/update (faz atualização de um controle de faturamento, todos os campos são opicionais com exceção do "id")
 ```
 payload:
 {
