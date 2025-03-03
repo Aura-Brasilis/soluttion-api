@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryBillingControlRepository } from '../repositories/in-memory/in-memory-billing-control-repository'
 import { UpdateBillingControlUseCase } from './update-billing-control'
-import { BillingControlFoundError } from './errors/billing-control-not-found'
+import { BillingControlNotFoundError } from './errors/billing-control-not-found'
 
 let billingControlRepository: InMemoryBillingControlRepository
 let sut: UpdateBillingControlUseCase
@@ -135,6 +135,6 @@ describe('Update billing controls use case', () => {
       sut.execute({
         data: dataToUpdate,
       }),
-    ).rejects.toBeInstanceOf(BillingControlFoundError)
+    ).rejects.toBeInstanceOf(BillingControlNotFoundError)
   })
 })
