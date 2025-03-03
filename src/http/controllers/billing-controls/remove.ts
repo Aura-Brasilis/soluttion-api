@@ -1,4 +1,4 @@
-import { BillingControlFoundError } from '@/use-cases/errors/billing-control-not-found'
+import { BillingControlNotFoundError } from '@/use-cases/errors/billing-control-not-found'
 import { makeRemoveBillingControlUseCase } from '@/use-cases/factories/make-remove-billing-control-use-case'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
@@ -19,7 +19,7 @@ export async function remove(req: FastifyRequest, res: FastifyReply) {
 
     return res.status(200).send({ success })
   } catch (err) {
-    if (err instanceof BillingControlFoundError) {
+    if (err instanceof BillingControlNotFoundError) {
       return res.status(404).send({ msg: err.message })
     }
   }

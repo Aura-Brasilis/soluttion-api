@@ -1,6 +1,6 @@
 import { ControleFaturamento } from '@prisma/client'
 import { BillingControlRepository } from '../repositories/billing-control-repository'
-import { BillingControlFoundError } from './errors/billing-control-not-found'
+import { BillingControlNotFoundError } from './errors/billing-control-not-found'
 
 interface GetBillingControlUseCaseRequest {
   billingControlId: number
@@ -20,7 +20,7 @@ export class GetBillingControlUseCase {
       await this.billingControlRepository.findById(billingControlId)
 
     if (!billingControl) {
-      throw new BillingControlFoundError()
+      throw new BillingControlNotFoundError()
     }
 
     return { billingControl }

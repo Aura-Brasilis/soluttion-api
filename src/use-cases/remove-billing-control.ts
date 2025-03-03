@@ -1,5 +1,5 @@
 import { BillingControlRepository } from '../repositories/billing-control-repository'
-import { BillingControlFoundError } from './errors/billing-control-not-found'
+import { BillingControlNotFoundError } from './errors/billing-control-not-found'
 
 interface RemoveBillingControlUseCaseRequest {
   billingControlId: number
@@ -19,7 +19,7 @@ export class RemoveBillingControlUseCase {
       await this.billingControlRepository.findById(billingControlId)
 
     if (!billingControl) {
-      throw new BillingControlFoundError()
+      throw new BillingControlNotFoundError()
     }
 
     const success = await this.billingControlRepository.delete(billingControlId)

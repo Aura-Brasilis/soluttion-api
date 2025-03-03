@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryBillingControlRepository } from '../repositories/in-memory/in-memory-billing-control-repository'
 import { GetBillingControlUseCase } from './get-billing-control'
-import { BillingControlFoundError } from './errors/billing-control-not-found'
+import { BillingControlNotFoundError } from './errors/billing-control-not-found'
 
 let billingControlRepository: InMemoryBillingControlRepository
 let sut: GetBillingControlUseCase
@@ -90,6 +90,6 @@ describe('Get billing controls use case', () => {
       sut.execute({
         billingControlId: notRegisteredBillingControlId,
       }),
-    ).rejects.toBeInstanceOf(BillingControlFoundError)
+    ).rejects.toBeInstanceOf(BillingControlNotFoundError)
   })
 })
