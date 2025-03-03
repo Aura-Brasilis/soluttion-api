@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '@/use-cases/errors/user-not-found'
 import { makeUpdateUserUseCase } from '@/use-cases/factories/make-update-user-use-case'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
@@ -31,23 +32,29 @@ export async function update(req: FastifyRequest, res: FastifyReply) {
     tipo,
   } = updateBodySchema.parse(req.body)
 
-  const updateUserUseCase = makeUpdateUserUseCase()
+  try {
+    const updateUserUseCase = makeUpdateUserUseCase()
 
-  const { user } = await updateUserUseCase.execute({
-    data: {
-      id,
-      cep,
-      cpfCnpj,
-      email,
-      idUsuario,
-      investimento,
-      nome,
-      razaoSocial,
-      responsavel,
-      telefone,
-      tipo,
-    },
-  })
+    const { user } = await updateUserUseCase.execute({
+      data: {
+        id,
+        cep,
+        cpfCnpj,
+        email,
+        idUsuario,
+        investimento,
+        nome,
+        razaoSocial,
+        responsavel,
+        telefone,
+        tipo,
+      },
+    })
 
-  return res.status(200).send({ user })
+    return res.status(200).send({ user })
+  } catch (err) {
+    if (err instanceof UserNotFoundError) {
+      return res.status(404).send({ msg: err.message })
+    }
+  }
 }
