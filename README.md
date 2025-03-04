@@ -183,3 +183,9 @@ query params:
 ```
 - GET /billing-controls/get/:billingControlId (busca um controle de faturamento)
 - DELETE /billing-controls/remove/:billingControlId (deleta um controle de faturamento)
+
+# API no Postman
+
+Para acessar as requisições da API diretamente no Postman, clique no link abaixo:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/join-team?invite_code=bde8fee7f88e7f12aaa0924d3cebbbbedba9921a75748bdda6ec645012d7b26d&target_code=f80b4e90d6f41ffc1766e51e7d4eccf1)
