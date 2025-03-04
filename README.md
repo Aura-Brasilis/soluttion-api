@@ -47,8 +47,30 @@ payload:
   cep?: string,
 }
 ```
-- GET /users/get/:userId (busca um usuário)
 - GET /users/list (busca todos os usuários registrados)
+```
+query params:
+{
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+        id?: number,
+        idUsuario?: string,
+        cpfCnpj?: string,
+        email?: string,
+        nome?: string,
+        investimento?: number,
+        responsavel?: string,
+        tipo?: string,
+        razaoSocial?: string,
+        telefone?: string,
+        cep?: string,
+    }
+}
+```
+- GET /users/get/:userId (busca um usuário)
 - DELETE /users/remove/:userId (deleta um usuário)
 
 ## Billing controls (Controle faturamento)
@@ -119,6 +141,45 @@ payload:
     mesContratoSoluttion?: string
 }
 ```
-- GET /billing-controls/get/:billingControlId (busca um controle de faturamento)
 - GET /billing-controls/list (busca todos os controles de faturamentos registrados)
+```
+query params:
+{
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+        id?: number,
+        idUsina?: number,
+        idInquilino?: number,
+        contribCusteioIpCip?: number,
+        cpflInquilino?: number | null,
+        credAdcBandTarifaria?: number,
+        creditoDebito?: number,
+        economia?: number | null,
+        incentivoInquilinoInvestidor?: number | null,
+        inquilinoPagar?: number | null,
+        investidorReceber?: number | null,
+        kwhAtivo?: number | null,
+        kwhInjetado?: number,
+        kwhMinimo?: number,
+        leitura1?: string | null,
+        leitura2?: string | null,
+        mes?: string,
+        mesRef?: string | null,
+        minimoInvestidor?: number,
+        observacao?: string | null,
+        saldoBancoAnterior?: number,
+        saldoBancoAtual?: number | null,
+        tarifaTeFv?: number,
+        tarifaTusdFv?: number,
+        taxaAdmSoluttion?: number | null,
+        totalCreditado?: number | null,
+        totalTarifasFv?: number,
+        mesContratoSoluttion?: string   
+    }
+}
+```
+- GET /billing-controls/get/:billingControlId (busca um controle de faturamento)
 - DELETE /billing-controls/remove/:billingControlId (deleta um controle de faturamento)
