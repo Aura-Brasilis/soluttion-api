@@ -43,7 +43,7 @@ describe('List users use case', () => {
     })
 
     const { users } = await sut.execute({
-      pagination: { limit: 10, orderBy: '', page: 1, skip: 0 },
+      pagination: { limit: 10, orderBy: '', page: 1, orderColumn: 'id' },
     })
 
     expect(users.data).toHaveLength(2)
@@ -67,7 +67,7 @@ describe('List users use case', () => {
     }
 
     const { users } = await sut.execute({
-      pagination: { limit: 10, orderBy: '', page: 3, skip: 0 },
+      pagination: { limit: 10, orderBy: '', page: 3, orderColumn: 'id' },
     })
 
     expect(users.data).toHaveLength(3)
@@ -95,8 +95,8 @@ describe('List users use case', () => {
       pagination: {
         limit: 10,
         orderBy: '',
+        orderColumn: 'id',
         page: 1,
-        skip: 0,
         search: {
           nome: 'Test user 2',
           id: 2,
