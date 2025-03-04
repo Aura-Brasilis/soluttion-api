@@ -9,19 +9,29 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
     orderBy: z.string().default('asc'),
     orderColumn: z.string().default('id'),
     search: z
-      .object({
-        id: z.number().optional(),
-        id_usuario: z.string().optional(),
-        nome: z.string().optional(),
-        email: z.string().optional(),
-        telefone: z.string().optional(),
-        cpf_cnpj: z.string().optional(),
-        razao_social: z.string().optional(),
-        investimento: z.coerce.number().optional(),
-        responsavel: z.string().optional(),
-        cep: z.string().optional(),
-        tipo: z.string().optional(),
+      .string()
+      .transform((val) => {
+        try {
+          return JSON.parse(val)
+        } catch (e) {
+          throw new Error('Invalid JSON format')
+        }
       })
+      .pipe(
+        z.object({
+          id: z.number().optional(),
+          id_usuario: z.string().optional(),
+          nome: z.string().optional(),
+          email: z.string().optional(),
+          telefone: z.string().optional(),
+          cpf_cnpj: z.string().optional(),
+          razao_social: z.string().optional(),
+          investimento: z.coerce.number().optional(),
+          responsavel: z.string().optional(),
+          cep: z.string().optional(),
+          tipo: z.string().optional(),
+        }),
+      )
       .optional(),
   })
 
