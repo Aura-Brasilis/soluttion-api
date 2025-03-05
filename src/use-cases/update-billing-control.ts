@@ -8,13 +8,9 @@ interface UpdateBillingControlUseCaseRequest {
     idUsina?: number | null
     idInquilino?: number | null
     contribCusteioIpCip?: number | null
-    cpflInquilino?: number | null
     credAdcBandTarifaria?: number | null
     creditoDebito?: number | null
     economia?: number | null
-    incentivoInquilinoInvestidor?: number | null
-    inquilinoPagar?: number | null
-    investidorReceber?: number | null
     kwhAtivo?: number | null
     kwhInjetado?: number | null
     kwhMinimo?: number | null
@@ -28,9 +24,6 @@ interface UpdateBillingControlUseCaseRequest {
     saldoBancoAtual?: number | null
     tarifaTeFv?: number | null
     tarifaTusdFv?: number | null
-    taxaAdmSoluttion?: number | null
-    totalCreditado?: number | null
-    totalTarifasFv?: number | null
     mesContratoSoluttion?: string | null
   }
 }
@@ -56,13 +49,9 @@ export class UpdateBillingControlUseCase {
       id_inquilino: data.idInquilino,
       id_usina: data.idUsina,
       contrib_custeio_ip_cip: data.contribCusteioIpCip,
-      cpfl_inquilino: data.cpflInquilino,
       cred_adc_band_tarifaria: data.credAdcBandTarifaria,
       credito_debito: data.creditoDebito,
       economia: data.economia,
-      incentivo_inquilino_investidor: data.incentivoInquilinoInvestidor,
-      inquilino_pagar: data.inquilinoPagar,
-      investidor_receber: data.investidorReceber,
       kwh_ativo: data.kwhAtivo,
       kwh_injetado: data.kwhInjetado,
       kwh_minimo: data.kwhMinimo,
@@ -77,9 +66,6 @@ export class UpdateBillingControlUseCase {
       saldo_banco_atual: data.saldoBancoAtual,
       tarifa_te_fv: data.tarifaTeFv,
       tarifa_tusd_fv: data.tarifaTusdFv,
-      taxa_adm_soluttion: data.taxaAdmSoluttion,
-      total_creditado: data.totalCreditado,
-      total_tarifas_fv: data.totalTarifasFv,
     }
 
     const updatedBillingControl =

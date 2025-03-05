@@ -3,13 +3,9 @@ export interface BillingControlSearch {
   idUsina?: number | null
   idInquilino?: number | null
   contribCusteioIpCip?: number | null
-  cpflInquilino?: number | null
   credAdcBandTarifaria?: number | null
   creditoDebito?: number | null
   economia?: number | null
-  incentivoInquilinoInvestidor?: number | null
-  inquilinoPagar?: number | null
-  investidorReceber?: number | null
   kwhAtivo?: number | null
   kwhInjetado?: number | null
   kwhMinimo?: number | null
@@ -23,8 +19,5 @@ export interface BillingControlSearch {
   saldoBancoAtual?: number | null
   tarifaTeFv?: number | null
   tarifaTusdFv?: number | null
-  taxaAdmSoluttion?: number | null
-  totalCreditado?: number | null
-  totalTarifasFv?: number | null
   mesContratoSoluttion?: string | null
 }

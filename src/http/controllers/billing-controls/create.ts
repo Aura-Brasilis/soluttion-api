@@ -7,13 +7,9 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     idInquilino: z.coerce.number(),
     idUsina: z.coerce.number(),
     contribCusteioIpCip: z.coerce.number(),
-    cpflInquilino: z.coerce.number().nullable().default(null),
     credAdcBandTarifaria: z.coerce.number(),
     creditoDebito: z.coerce.number(),
     economia: z.coerce.number().nullable().default(null),
-    incentivoInquilinoInvestidor: z.coerce.number().nullable().default(null),
-    inquilinoPagar: z.coerce.number().nullable().default(null),
-    investidorReceber: z.coerce.number().nullable().default(null),
     kwhAtivo: z.coerce.number().nullable().default(null),
     kwhInjetado: z.coerce.number(),
     kwhMinimo: z.coerce.number(),
@@ -27,23 +23,16 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     saldoBancoAtual: z.coerce.number().nullable().default(null),
     tarifaTeFv: z.coerce.number(),
     tarifaTusdFv: z.coerce.number(),
-    taxaAdmSoluttion: z.coerce.number().nullable().default(null),
-    totalCreditado: z.coerce.number().nullable().default(null),
-    totalTarifasFv: z.coerce.number(),
     mesContratoSoluttion: z.string(),
   })
 
   const {
     contribCusteioIpCip,
-    cpflInquilino,
     credAdcBandTarifaria,
     creditoDebito,
     economia,
     idInquilino,
     idUsina,
-    incentivoInquilinoInvestidor,
-    inquilinoPagar,
-    investidorReceber,
     kwhAtivo,
     kwhInjetado,
     kwhMinimo,
@@ -58,24 +47,17 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     saldoBancoAtual,
     tarifaTeFv,
     tarifaTusdFv,
-    taxaAdmSoluttion,
-    totalCreditado,
-    totalTarifasFv,
   } = createBodySchema.parse(req.body)
 
   const createBillingControlsUseCase = makeCreateBillingControlUseCase()
 
   const { billingControl } = await createBillingControlsUseCase.execute({
     contribCusteioIpCip,
-    cpflInquilino,
     credAdcBandTarifaria,
     creditoDebito,
     economia,
     idInquilino,
     idUsina,
-    incentivoInquilinoInvestidor,
-    inquilinoPagar,
-    investidorReceber,
     kwhAtivo,
     kwhInjetado,
     kwhMinimo,
@@ -90,9 +72,6 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     saldoBancoAtual,
     tarifaTeFv,
     tarifaTusdFv,
-    taxaAdmSoluttion,
-    totalCreditado,
-    totalTarifasFv,
   })
 
   return res.status(200).send({ billingControl })
