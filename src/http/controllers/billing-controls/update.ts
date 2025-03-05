@@ -67,9 +67,9 @@ export async function update(req: FastifyRequest, res: FastifyReply) {
   } = updateBodySchema.parse(req.body)
 
   try {
-    const updateUserUseCase = makeUpdateBillingControlUseCase()
+    const updateBillingControlUseCase = makeUpdateBillingControlUseCase()
 
-    const { billingControl } = await updateUserUseCase.execute({
+    const { billingControl } = await updateBillingControlUseCase.execute({
       data: {
         id,
         contribCusteioIpCip,

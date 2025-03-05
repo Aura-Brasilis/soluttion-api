@@ -63,9 +63,9 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     totalTarifasFv,
   } = createBodySchema.parse(req.body)
 
-  const createUserUseCase = makeCreateBillingControlUseCase()
+  const createBillingControlsUseCase = makeCreateBillingControlUseCase()
 
-  const { billingControl } = await createUserUseCase.execute({
+  const { billingControl } = await createBillingControlsUseCase.execute({
     contribCusteioIpCip,
     cpflInquilino,
     credAdcBandTarifaria,

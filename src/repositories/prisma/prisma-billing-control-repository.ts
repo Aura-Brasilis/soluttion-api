@@ -1,6 +1,7 @@
 import { Prisma, ControleFaturamento } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { BillingControlRepository } from '../billing-control-repository'
+import { Pagination } from '@/@types/pagination'
 
 export class PrismaBillingControlRepository
   implements BillingControlRepository
@@ -23,10 +24,47 @@ export class PrismaBillingControlRepository
     return billingControl
   }
 
-  async findAll() {
-    const billingControls = await prisma.controleFaturamento.findMany()
+  async findAll(pagination: Pagination) {
+    const { page, limit, search, orderBy, orderColumn } = pagination
 
-    return billingControls
+    const filters: Record<string, unknown> = {}
+    if (search) {
+      Object.entries(search).forEach(([key, value]) => {
+        if (value) {
+          if (typeof value === 'string') {
+            filters[key] = { contains: value, mode: 'insensitive' }
+          } else {
+            filters[key] = value
+          }
+        }
+      })
+    }
+
+    console.log('filters', filters)
+
+    const total = await prisma.controleFaturamento.count({ where: filters })
+
+    const skip = (page - 1) * limit
+
+    const orderConfig = orderColumn ? { [orderColumn]: orderBy } : undefined
+
+    const billingControls = await prisma.controleFaturamento.findMany({
+      where: filters,
+      skip,
+      take: limit,
+      orderBy: orderConfig,
+    })
+
+    return {
+      data: billingControls,
+      pagination: {
+        page,
+        limit,
+        total,
+        hasNextPage: skip + limit < total,
+        hasPrevPage: skip > 0,
+      },
+    }
   }
 
   async update(data: ControleFaturamento) {

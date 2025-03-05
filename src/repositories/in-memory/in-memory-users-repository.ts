@@ -1,6 +1,7 @@
 import { Usuarios } from '@prisma/client'
 import { UsersRepository } from '../users-repository'
 import { randomInt } from 'node:crypto'
+import { Pagination } from '@/@types/pagination'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public items: Usuarios[] = []
@@ -33,8 +34,39 @@ export class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 
-  async findAll() {
-    return this.items
+  async findAll(pagination: Pagination) {
+    const { page = 1, limit = 10, search } = pagination
+
+    let filteredUsers = this.items
+
+    if (search) {
+      filteredUsers = filteredUsers.filter((user) => {
+        return Object.entries(search).every(([key, value]) => {
+          if (!value) return true // Ignora campos não preenchidos
+          const userValue = user[key as keyof Usuarios]
+          if (typeof userValue === 'string') {
+            return userValue.toLowerCase().includes(String(value).toLowerCase())
+          }
+          return userValue === value
+        })
+      })
+    }
+
+    const total = filteredUsers.length
+    const startIndex = (page - 1) * limit
+    const endIndex = startIndex + limit
+    const paginatedData = filteredUsers.slice(startIndex, endIndex)
+
+    return {
+      data: paginatedData,
+      pagination: {
+        page,
+        limit,
+        total,
+        hasNextPage: endIndex < total,
+        hasPrevPage: startIndex > 0,
+      },
+    }
   }
 
   async update(data: Usuarios) {

@@ -11,9 +11,9 @@ export async function remove(req: FastifyRequest, res: FastifyReply) {
   const { billingControlId } = removeParamsSchema.parse(req.params)
 
   try {
-    const removeUserUseCase = makeRemoveBillingControlUseCase()
+    const removeBillingControlUseCase = makeRemoveBillingControlUseCase()
 
-    const { success } = await removeUserUseCase.execute({
+    const { success } = await removeBillingControlUseCase.execute({
       billingControlId,
     })
 

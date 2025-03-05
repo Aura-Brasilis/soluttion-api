@@ -11,9 +11,9 @@ export async function get(req: FastifyRequest, res: FastifyReply) {
   const { billingControlId } = getParamsSchema.parse(req.params)
 
   try {
-    const getUserUseCase = makeGetBillingControlUseCase()
+    const getBillingControlUseCase = makeGetBillingControlUseCase()
 
-    const { billingControl } = await getUserUseCase.execute({
+    const { billingControl } = await getBillingControlUseCase.execute({
       billingControlId,
     })
 
