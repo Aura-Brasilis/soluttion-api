@@ -16,12 +16,28 @@ export class PrismaBillingControlRepository
 
   async findById(billingControlId: number) {
     const billingControl = await prisma.controleFaturamento.findUnique({
+      include: {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: true,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: true,
+      },
       where: {
         id: billingControlId,
       },
     })
 
-    return billingControl
+    if (!billingControl) {
+      return null
+    }
+
+    const {
+      Usuarios_ControleFaturamento_id_inquilinoToUsuarios: tenant,
+      Usuarios_ControleFaturamento_id_usinaToUsuarios: plant,
+      ...rest
+    } = billingControl
+
+    const formatedBillingControl = { ...rest, tenant, plant }
+
+    return formatedBillingControl
   }
 
   async findAll(pagination: Pagination) {
@@ -48,13 +64,31 @@ export class PrismaBillingControlRepository
 
     const billingControls = await prisma.controleFaturamento.findMany({
       where: filters,
+      include: {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: true,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: true,
+      },
       skip,
       take: limit,
       orderBy: orderConfig,
     })
 
+    const formattedBillingControls = billingControls.map((item) => {
+      const {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: tenant,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: plant,
+        ...rest
+      } = item
+
+      return {
+        ...rest, // Mantém os outros campos do objeto
+        tenant, // Novo nome mais legível
+        plant, // Novo nome mais legível
+      }
+    })
+
     return {
-      data: billingControls,
+      data: formattedBillingControls,
       pagination: {
         page,
         limit,
