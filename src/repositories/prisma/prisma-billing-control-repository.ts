@@ -40,8 +40,6 @@ export class PrismaBillingControlRepository
       })
     }
 
-    console.log('filters', filters)
-
     const total = await prisma.controleFaturamento.count({ where: filters })
 
     const skip = (page - 1) * limit
