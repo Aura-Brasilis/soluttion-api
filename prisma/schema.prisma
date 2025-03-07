@@ -97,14 +97,14 @@ model historico_consumo {
 
 model itens_cobranca {
   id                  BigInt          @id @default(autoincrement())
-  fatura_numero       String          @db.VarChar(255)
-  codigo              String          @db.VarChar(255)
-  descricao           String          @db.VarChar(255)
-  quantidade_kwh      Int?
-  tarifa_com_impostos Decimal?        @db.Decimal(10, 4)
-  valor               Decimal         @db.Decimal(10, 2)
-  bandeira            String?         @db.VarChar(255)
-  mes_referencia      String?         @db.VarChar(255)
+  fatura_numero       String          @default("NULL") @db.VarChar(255)
+  codigo              String          @default("NULL") @db.VarChar(255)
+  descricao           String          @default("NULL") @db.VarChar(255)
+  quantidade_kwh      Int?            @default(0)
+  tarifa_com_impostos Decimal?        @default(0) @db.Decimal(10, 4)
+  valor               Decimal         @default(0) @db.Decimal(10, 2)
+  bandeira            String?         @default("NULL") @db.VarChar(255)
+  mes_referencia      String?         @default("NULL") @db.VarChar(255)
   created_at          DateTime?       @default(now()) @db.Timestamptz(6)
   faturas_energia     faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: Cascade, onUpdate: NoAction, map: "fk_fatura_numero")
 }
