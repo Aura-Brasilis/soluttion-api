@@ -1,5 +1,6 @@
 import { BillingControlSearch } from './billing-control-search'
 import { BillingItemsSearch } from './billing-items-search'
+import { EnergyBillsSearch } from './energy-bills-search'
 import { UserSearch } from './user-search'
 
 export interface Pagination {
@@ -7,5 +8,9 @@ export interface Pagination {
   limit: number
   orderBy: string
   orderColumn: string
-  search?: UserSearch | BillingControlSearch | BillingItemsSearch
+  search?:
+    | UserSearch
+    | BillingControlSearch
+    | BillingItemsSearch
+    | EnergyBillsSearch
 }
