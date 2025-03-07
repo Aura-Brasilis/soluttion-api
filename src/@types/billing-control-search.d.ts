@@ -1,5 +1,5 @@
 export interface BillingControlSearch {
-  id: number
+  id?: number
   idUsina?: number | null
   idInquilino?: number | null
   contribCusteioIpCip?: number | null
