@@ -81,9 +81,9 @@ export class PrismaBillingControlRepository
       } = item
 
       return {
-        ...rest, // Mantém os outros campos do objeto
-        tenant, // Novo nome mais legível
-        plant, // Novo nome mais legível
+        ...rest,
+        tenant,
+        plant,
       }
     })
 

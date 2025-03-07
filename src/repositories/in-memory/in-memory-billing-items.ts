@@ -21,7 +21,7 @@ export class InMemoryBillingItemsRepository implements BillingItemsRepository {
     if (search) {
       filteredBillingItems = filteredBillingItems.filter((user) => {
         return Object.entries(search).every(([key, value]) => {
-          if (!value) return true // Ignora campos não preenchidos
+          if (!value) return true
           const userValue = user[key as keyof ItensCobranca]
           if (typeof userValue === 'string') {
             return userValue.toLowerCase().includes(String(value).toLowerCase())

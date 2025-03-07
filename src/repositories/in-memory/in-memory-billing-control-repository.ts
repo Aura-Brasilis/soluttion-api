@@ -54,7 +54,7 @@ export class InMemoryBillingControlRepository
     if (search) {
       filteredBillingControls = filteredBillingControls.filter((user) => {
         return Object.entries(search).every(([key, value]) => {
-          if (!value) return true // Ignora campos não preenchidos
+          if (!value) return true
           const userValue = user[key as keyof ControleFaturamento]
           if (typeof userValue === 'string') {
             return userValue.toLowerCase().includes(String(value).toLowerCase())
