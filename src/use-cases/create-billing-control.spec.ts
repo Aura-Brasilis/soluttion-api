@@ -14,15 +14,11 @@ describe('Create billing controls use case', () => {
   it('should be able to create a new billing control', async () => {
     const { billingControl } = await sut.execute({
       contribCusteioIpCip: 1,
-      cpflInquilino: 1,
       credAdcBandTarifaria: 1,
       creditoDebito: 1,
       economia: 1,
       idUsina: 1,
       idInquilino: 1,
-      incentivoInquilinoInvestidor: 1,
-      inquilinoPagar: 1,
-      investidorReceber: 1,
       kwhAtivo: 1,
       kwhInjetado: 1,
       kwhMinimo: 1,
@@ -37,9 +33,6 @@ describe('Create billing controls use case', () => {
       saldoBancoAtual: 0,
       tarifaTeFv: 0,
       tarifaTusdFv: 0,
-      taxaAdmSoluttion: 0,
-      totalCreditado: 0,
-      totalTarifasFv: 0,
     })
 
     expect(billingControl.id).toEqual(expect.any(Number))

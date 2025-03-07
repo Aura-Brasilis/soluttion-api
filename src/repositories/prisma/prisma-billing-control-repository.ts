@@ -16,12 +16,28 @@ export class PrismaBillingControlRepository
 
   async findById(billingControlId: number) {
     const billingControl = await prisma.controleFaturamento.findUnique({
+      include: {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: true,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: true,
+      },
       where: {
         id: billingControlId,
       },
     })
 
-    return billingControl
+    if (!billingControl) {
+      return null
+    }
+
+    const {
+      Usuarios_ControleFaturamento_id_inquilinoToUsuarios: tenant,
+      Usuarios_ControleFaturamento_id_usinaToUsuarios: plant,
+      ...rest
+    } = billingControl
+
+    const formatedBillingControl = { ...rest, tenant, plant }
+
+    return formatedBillingControl
   }
 
   async findAll(pagination: Pagination) {
@@ -40,8 +56,6 @@ export class PrismaBillingControlRepository
       })
     }
 
-    console.log('filters', filters)
-
     const total = await prisma.controleFaturamento.count({ where: filters })
 
     const skip = (page - 1) * limit
@@ -50,13 +64,31 @@ export class PrismaBillingControlRepository
 
     const billingControls = await prisma.controleFaturamento.findMany({
       where: filters,
+      include: {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: true,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: true,
+      },
       skip,
       take: limit,
       orderBy: orderConfig,
     })
 
+    const formattedBillingControls = billingControls.map((item) => {
+      const {
+        Usuarios_ControleFaturamento_id_inquilinoToUsuarios: tenant,
+        Usuarios_ControleFaturamento_id_usinaToUsuarios: plant,
+        ...rest
+      } = item
+
+      return {
+        ...rest,
+        tenant,
+        plant,
+      }
+    })
+
     return {
-      data: billingControls,
+      data: formattedBillingControls,
       pagination: {
         page,
         limit,
@@ -72,13 +104,9 @@ export class PrismaBillingControlRepository
       id_inquilino: data.id_inquilino,
       id_usina: data.id_usina,
       contrib_custeio_ip_cip: data.contrib_custeio_ip_cip,
-      cpfl_inquilino: data.cpfl_inquilino,
       cred_adc_band_tarifaria: data.cred_adc_band_tarifaria,
       credito_debito: data.credito_debito,
       economia: data.economia,
-      incentivo_inquilino_investidor: data.incentivo_inquilino_investidor,
-      inquilino_pagar: data.inquilino_pagar,
-      investidor_receber: data.investidor_receber,
       kwh_ativo: data.kwh_ativo,
       kwh_injetado: data.kwh_injetado,
       kwh_minimo: data.kwh_minimo,
@@ -92,9 +120,6 @@ export class PrismaBillingControlRepository
       saldo_banco_atual: data.saldo_banco_atual,
       tarifa_te_fv: data.tarifa_te_fv,
       tarifa_tusd_fv: data.tarifa_tusd_fv,
-      taxa_adm_soluttion: data.taxa_adm_soluttion,
-      total_creditado: data.total_creditado,
-      total_tarifas_fv: data.total_tarifas_fv,
       mes_contrato_soluttion: data.mes_contrato_soluttion,
     }
 

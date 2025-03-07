@@ -14,13 +14,9 @@ export class InMemoryBillingControlRepository
       id_inquilino: data.id_inquilino,
       id_usina: data.id_usina,
       contrib_custeio_ip_cip: data.contrib_custeio_ip_cip,
-      cpfl_inquilino: data.cpfl_inquilino,
       cred_adc_band_tarifaria: data.cred_adc_band_tarifaria,
       credito_debito: data.credito_debito,
       economia: data.economia,
-      incentivo_inquilino_investidor: data.incentivo_inquilino_investidor,
-      inquilino_pagar: data.inquilino_pagar,
-      investidor_receber: data.investidor_receber,
       kwh_ativo: data.kwh_ativo,
       kwh_injetado: data.kwh_injetado,
       kwh_minimo: data.kwh_minimo,
@@ -34,9 +30,6 @@ export class InMemoryBillingControlRepository
       saldo_banco_atual: data.saldo_banco_atual,
       tarifa_te_fv: data.tarifa_te_fv,
       tarifa_tusd_fv: data.tarifa_tusd_fv,
-      taxa_adm_soluttion: data.taxa_adm_soluttion,
-      total_creditado: data.total_creditado,
-      total_tarifas_fv: data.total_tarifas_fv,
       mes_contrato_soluttion: data.mes_contrato_soluttion,
     }
 
@@ -61,7 +54,7 @@ export class InMemoryBillingControlRepository
     if (search) {
       filteredBillingControls = filteredBillingControls.filter((user) => {
         return Object.entries(search).every(([key, value]) => {
-          if (!value) return true // Ignora campos não preenchidos
+          if (!value) return true
           const userValue = user[key as keyof ControleFaturamento]
           if (typeof userValue === 'string') {
             return userValue.toLowerCase().includes(String(value).toLowerCase())

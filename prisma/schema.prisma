@@ -36,16 +36,9 @@ model ControleFaturamento {
   economia                                            Decimal?  @db.Decimal
   tarifa_tusd_fv                                      Decimal?  @db.Decimal
   tarifa_te_fv                                        Decimal?  @db.Decimal
-  total_tarifas_fv                                    Decimal?  @db.Decimal
-  total_creditado                                     Decimal?  @db.Decimal
   cred_adc_band_tarifaria                             Decimal?  @db.Decimal
   contrib_custeio_ip_cip                              Decimal?  @db.Decimal
-  cpfl_inquilino                                      Decimal?  @db.Decimal
-  incentivo_inquilino_investidor                      Decimal?  @db.Decimal
   minimo_investidor                                   Decimal?  @db.Decimal
-  inquilino_pagar                                     Decimal?  @db.Decimal
-  taxa_adm_soluttion                                  Decimal?  @db.Decimal
-  investidor_receber                                  Decimal?  @db.Decimal
   credito_debito                                      Decimal?  @db.Decimal
   saldo_banco_anterior                                Decimal?  @db.Decimal
   saldo_banco_atual                                   Decimal?  @db.Decimal
@@ -54,4 +47,64 @@ model ControleFaturamento {
   id_inquilino                                        Int?
   Usuarios_ControleFaturamento_id_inquilinoToUsuarios Usuarios? @relation("ControleFaturamento_id_inquilinoToUsuarios", fields: [id_inquilino], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_inquilino")
   Usuarios_ControleFaturamento_id_usinaToUsuarios     Usuarios? @relation("ControleFaturamento_id_usinaToUsuarios", fields: [id_usina], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usuario")
+}
+
+model faturas_energia {
+  id                                   BigInt              @id @default(autoincrement())
+  empresa_nome                         String              @db.VarChar(255)
+  empresa_endereco                     String?             @db.VarChar(255)
+  empresa_cnpj                         String              @db.VarChar(255)
+  fatura_numero                        String              @unique @db.VarChar(255)
+  fatura_serie                         String?             @db.VarChar(255)
+  data_emissao                         DateTime?           @db.Date
+  data_vencimento                      DateTime?           @db.Date
+  valor_total                          Decimal             @db.Decimal(10, 2)
+  proxima_leitura                      DateTime?           @db.Date
+  cliente_nome                         String              @db.VarChar(255)
+  cliente_endereco                     String?             @db.VarChar(255)
+  cliente_cpf                          String?             @db.VarChar(14)
+  cliente_classificacao                String?             @db.VarChar(255)
+  instalacao_numero_contrato           String              @db.VarChar(255)
+  instalacao_numero_instalacao         String?             @db.VarChar(255)
+  instalacao_numero_medidor            String?             @db.VarChar(255)
+  consumo_mes_referencia               String?             @db.VarChar(255)
+  consumo_total_kwh                    Int?
+  impostos_base_icms                   Decimal?            @db.Decimal(10, 2)
+  impostos_pis                         Decimal?            @db.Decimal(10, 2)
+  impostos_cofins                      Decimal?            @db.Decimal(10, 2)
+  leitura_energia_ativa_atual          Int?
+  leitura_energia_ativa_anterior       Int?
+  leitura_energia_ativa_consumo_kwh    Int?
+  leitura_energia_injetada_atual       Int?
+  leitura_energia_injetada_anterior    Int?
+  leitura_energia_injetada_consumo_kwh Int?
+  contato_telefone                     String?             @db.VarChar(255)
+  contato_site                         String?             @db.VarChar(255)
+  created_at                           DateTime?           @default(now()) @db.Timestamptz(6)
+  historico_consumo                    historico_consumo[]
+  itens_cobranca                       itens_cobranca[]
+}
+
+model historico_consumo {
+  id              BigInt          @id @default(autoincrement())
+  fatura_numero   String          @db.VarChar(255)
+  mes             String          @db.VarChar(255)
+  consumo_kwh     Int
+  dias            Int
+  created_at      DateTime?       @default(now()) @db.Timestamptz(6)
+  faturas_energia faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: Cascade, onUpdate: NoAction, map: "fk_fatura_numero")
+}
+
+model itens_cobranca {
+  id                  BigInt          @id @default(autoincrement())
+  fatura_numero       String          @default("NULL") @db.VarChar(255)
+  codigo              String          @default("NULL") @db.VarChar(255)
+  descricao           String          @default("NULL") @db.VarChar(255)
+  quantidade_kwh      Int?            @default(0)
+  tarifa_com_impostos Decimal?        @default(0) @db.Decimal(10, 4)
+  valor               Decimal         @default(0) @db.Decimal(10, 2)
+  bandeira            String?         @default("NULL") @db.VarChar(255)
+  mes_referencia      String?         @default("NULL") @db.VarChar(255)
+  created_at          DateTime?       @default(now()) @db.Timestamptz(6)
+  faturas_energia     faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: Cascade, onUpdate: NoAction, map: "fk_fatura_numero")
 }

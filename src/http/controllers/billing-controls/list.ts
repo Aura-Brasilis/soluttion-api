@@ -23,16 +23,9 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           id_inquilino: z.coerce.number().optional(),
           id_usina: z.coerce.number().optional(),
           contrib_custeio_ip_cip: z.coerce.number().optional(),
-          cpfl_inquilino: z.coerce.number().nullable().optional(),
           cred_adc_band_tarifaria: z.coerce.number().optional(),
           credito_debito: z.coerce.number().optional(),
           economia: z.coerce.number().nullable().optional(),
-          incentivo_inquilino_investidor: z.coerce
-            .number()
-            .nullable()
-            .optional(),
-          inquilino_pagar: z.coerce.number().nullable().optional(),
-          investidor_receber: z.coerce.number().nullable().optional(),
           kwh_ativo: z.coerce.number().nullable().optional(),
           kwh_injetado: z.coerce.number().optional(),
           kwh_minimo: z.coerce.number().optional(),
@@ -46,9 +39,6 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           saldo_banco_atual: z.coerce.number().nullable().optional(),
           tarifa_te_fv: z.coerce.number().optional(),
           tarifa_tusd_fv: z.coerce.number().optional(),
-          taxa_adm_soluttion: z.coerce.number().nullable().optional(),
-          total_creditado: z.coerce.number().nullable().optional(),
-          total_tarifas_fv: z.coerce.number().optional(),
           mes_contrato_soluttion: z.string().optional(),
         }),
       )
