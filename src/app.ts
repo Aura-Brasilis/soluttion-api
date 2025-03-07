@@ -6,6 +6,7 @@ import { usersRoutes } from './http/controllers/users/routes'
 import { billingControlsRoutes } from './http/controllers/billing-controls/routes'
 import { energyBillsRoutes } from './http/controllers/energy-bills/routes'
 import { billingItemsRoutes } from './http/controllers/billing-items/routes'
+import { consumptionHistoriesRoutes } from './http/controllers/consumption-history/routes'
 
 export const app = fastify()
 
@@ -17,6 +18,7 @@ app.register(usersRoutes)
 app.register(billingControlsRoutes)
 app.register(energyBillsRoutes)
 app.register(billingItemsRoutes)
+app.register(consumptionHistoriesRoutes)
 
 app.setErrorHandler((error, _, res) => {
   if (error instanceof ZodError) {
