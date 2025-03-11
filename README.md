@@ -252,7 +252,7 @@ query params:
 - GET /consumption-history/get/:consumptionHistoryId (busca um histórico de consumo)
 
 ## Billing items (Itens cobrança)
-- GET /billing-items/list
+- GET /billing-items/list (busca todos os itens de cobrança registrados)
 ```
   query params:
   {
