@@ -184,6 +184,98 @@ query params:
 - GET /billing-controls/get/:billingControlId (busca um controle de faturamento)
 - DELETE /billing-controls/remove/:billingControlId (deleta um controle de faturamento)
 
+## Energy bills (Faturas energia)
+- GET /energy-bills/list (busca todas as faturas de energia registradas)
+```
+  query params:
+  {
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+        id?: bigint,
+        empresa_nome?: string,
+        empresa_endereco?: string,
+        empresa_cnpj?: string,
+        fatura_numero?: string,
+        fatura_serie?: string,
+        data_emissao?: string,
+        data_vencimento?: string,
+        valor_total?: number,
+        proxima_leitura?: string,
+        cliente_nome?: string,
+        cliente_endereco?: string,
+        cliente_cpf?: string,
+        cliente_classificacao?: string,
+        instalacao_numero_contrato?: string,
+        instalacao_numero_instalacao?: string,
+        instalacao_numero_medidor?: string,
+        consumo_mes_referencia?: string,
+        consumo_total_kwh?: number,
+        impostos_base_icms?: number,
+        impostos_pis?: number,
+        impostos_cofins?: number,
+        leitura_energia_ativa_atual?: number,
+        leitura_energia_ativa_anterior?: number,
+        leitura_energia_ativa_consumo_kwh?: number,
+        leitura_energia_injetada_atual?: number,
+        leitura_energia_injetada_anterior?: number,
+        leitura_energia_injetada_consumo_kwh?: number,
+        contato_telefone?: string,
+        contato_site?: string,
+        created_at?: string
+    }
+}
+```
+- GET /energy-bills/get/:energyBillId (busca uma fatura de energia)
+
+## Consumption history (Histórico de consumo)
+- GET /consumption-history/list (busca todos os históricos de consumo registrados)
+```
+  query params:
+  {
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+      id?: bigint,
+      fatura_numero?: string,
+      mes?: string,
+      consumo_kwh?: number,
+      dias?: number,
+      created_at?: string
+    }
+}
+```
+- GET /consumption-history/get/:consumptionHistoryId (busca um histórico de consumo)
+
+## Billing items (Itens cobrança)
+- GET /billing-items/list
+```
+  query params:
+  {
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+      id?: bigint,
+      fatura_numero?: string,
+      codigo?: string,
+      descricao?: string,
+      quantidade_kwh?: number,
+      tarifa_com_impostos?: number,
+      valor?: number,
+      bandeira?: string,
+      mes_referencia?: string,
+      created_at?: string
+    }
+}
+```
+- GET /billing-items/get/:billingItemId (busca um item de cobrança)
+
 # API no Postman
 
 Para acessar as requisições da API diretamente no Postman, clique no link abaixo:
