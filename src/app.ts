@@ -7,6 +7,7 @@ import { billingControlsRoutes } from './http/controllers/billing-controls/route
 import { energyBillsRoutes } from './http/controllers/energy-bills/routes'
 import { billingItemsRoutes } from './http/controllers/billing-items/routes'
 import { consumptionHistoriesRoutes } from './http/controllers/consumption-history/routes'
+import { billingItems2Routes } from './http/controllers/billing-items-2/routes'
 
 export const app = fastify()
 
@@ -18,6 +19,7 @@ app.register(usersRoutes)
 app.register(billingControlsRoutes)
 app.register(energyBillsRoutes)
 app.register(billingItemsRoutes)
+app.register(billingItems2Routes)
 app.register(consumptionHistoriesRoutes)
 
 app.setErrorHandler((error, _, res) => {
