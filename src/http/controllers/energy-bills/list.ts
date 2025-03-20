@@ -20,6 +20,8 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
       .pipe(
         z.object({
           id: z.coerce.bigint().optional(),
+          id_usuario: z.coerce.number().optional(),
+          id_usina: z.coerce.number().optional(),
           empresa_nome: z.string().optional(),
           empresa_endereco: z.string().optional(),
           empresa_cnpj: z.string().optional(),
@@ -41,6 +43,7 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           impostos_base_icms: z.coerce.number().optional(),
           impostos_pis: z.coerce.number().optional(),
           impostos_cofins: z.coerce.number().optional(),
+          porcentagem_contratual: z.coerce.number().optional(),
           leitura_energia_ativa_atual: z.coerce.number().optional(),
           leitura_energia_ativa_anterior: z.coerce.number().optional(),
           leitura_energia_ativa_consumo_kwh: z.coerce.number().optional(),
@@ -49,6 +52,10 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           leitura_energia_injetada_consumo_kwh: z.coerce.number().optional(),
           contato_telefone: z.string().optional(),
           contato_site: z.string().optional(),
+          pn: z.string().optional(),
+          pn_mes: z.string().optional(),
+          tipo: z.string().optional(),
+          informacoes_fatura: z.string().optional(),
           created_at: z.string().optional(),
         }),
       )

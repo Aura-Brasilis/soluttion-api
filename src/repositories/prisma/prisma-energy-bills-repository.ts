@@ -9,6 +9,7 @@ export class PrismaEnergyBillsRepository implements EnergyBillsRepository {
         historico_consumo: true,
         itens_cobranca: true,
         Usuarios: true,
+        usinas: true,
       },
       where: {
         id: energyBillsId,
@@ -50,6 +51,7 @@ export class PrismaEnergyBillsRepository implements EnergyBillsRepository {
         historico_consumo: true,
         itens_cobranca: true,
         Usuarios: true,
+        usinas: true,
       },
       skip,
       take: limit,
