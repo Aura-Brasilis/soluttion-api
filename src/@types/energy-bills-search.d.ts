@@ -1,5 +1,7 @@
 export interface EnergyBillsSearch {
   id?: bigint
+  id_usuario?: number
+  id_usina?: number
   empresa_nome?: string
   empresa_endereco?: string
   empresa_cnpj?: string
@@ -29,5 +31,10 @@ export interface EnergyBillsSearch {
   leitura_energia_injetada_consumo_kwh?: number
   contato_telefone?: string
   contato_site?: string
+  porcentagem_contratual?: number
+  informacoes_fatura?: string
+  pn?: string
+  pn_mes?: string
+  tipo?: string
   created_at?: string
 }

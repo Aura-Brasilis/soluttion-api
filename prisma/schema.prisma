@@ -22,6 +22,7 @@ model Usuarios {
   ControleFaturamento_ControleFaturamento_id_inquilinoToUsuarios ControleFaturamento[] @relation("ControleFaturamento_id_inquilinoToUsuarios")
   ControleFaturamento_ControleFaturamento_id_usinaToUsuarios     ControleFaturamento[] @relation("ControleFaturamento_id_usinaToUsuarios")
   faturas_energia                                                faturas_energia[]
+  faturas_energia_faturas_energia_id_usinaToUsuarios             faturas_energia[]     @relation("faturas_energia_id_usinaToUsuarios")
 }
 
 model ControleFaturamento {
@@ -85,7 +86,12 @@ model faturas_energia {
   informacoes_fatura                   String?
   porcentagem_contratual               Decimal?            @db.Decimal(10, 2)
   id_usuario                           Int?
+  pn                                   String?             @db.VarChar(255)
+  id_usina                             Int?
+  pn_mes                               String?             @db.VarChar(255)
+  tipo                                 String?             @db.VarChar(255)
   Usuarios                             Usuarios?           @relation(fields: [id_usuario], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_faturas_usuarios")
+  usinas                               Usuarios?           @relation("faturas_energia_id_usinaToUsuarios", fields: [id_usina], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usina")
   historico_consumo                    historico_consumo[]
   itens_cobranca                       itens_cobranca[]
   itens_cobranca2                      itens_cobranca2[]
@@ -116,16 +122,20 @@ model itens_cobranca {
 }
 
 model itens_cobranca2 {
-  id                 BigInt          @id @default(autoincrement())
-  fatura_numero      String          @db.VarChar(255)
-  mes_referencia     String?         @db.VarChar(255)
-  ativa_cpfl_tarifas Decimal?        @db.Decimal(10, 4)
-  ativa_cpfl_valor   Decimal?        @db.Decimal(10, 2)
-  extras_cpfl        Decimal?        @db.Decimal(10, 2)
-  injetada_tarifas   Decimal?        @db.Decimal(10, 4)
-  injetada_valor     Decimal?        @db.Decimal(10, 2)
-  kwh_ativa          Int?
-  kwh_injetada       Int?
-  created_at         DateTime        @default(now()) @db.Timestamp(6)
-  faturas_energia    faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
+  id                               BigInt          @id @default(autoincrement())
+  fatura_numero                    String          @db.VarChar(255)
+  mes_referencia                   String?         @db.VarChar(255)
+  ativa_cpfl_tarifas               Decimal?        @db.Decimal(10, 4)
+  ativa_cpfl_valor                 Decimal?        @db.Decimal(10, 2)
+  extras_cpfl                      Decimal?        @db.Decimal(10, 2)
+  injetada_tarifas                 Decimal?        @db.Decimal(10, 4)
+  injetada_valor                   Decimal?        @db.Decimal(10, 2)
+  kwh_ativa                        Int?
+  kwh_injetada                     Int?
+  created_at                       DateTime        @default(now()) @db.Timestamp(6)
+  injetada_valor_descontado        Decimal?        @db.Decimal(10, 2)
+  injetada_valor_desconto_aplicado Decimal?        @db.Decimal(10, 2)
+  final_total_pagar                Decimal?        @db.Decimal(10, 2)
+  final_total_cpfl                 Decimal?        @db.Decimal(10, 2)
+  faturas_energia                  faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
 }
