@@ -283,6 +283,31 @@ query params:
 ```
 - GET /billing-items/get/:billingItemId (busca um item de cobrança)
 
+## Billing items 2 (Itens cobrança 2)
+- GET /billing-items-2/list (busca todos os itens de cobrança 2 registrados)
+```
+    query params:
+  {
+    page?: number,
+    limit?: number,
+    orderBy?: string,
+    orderColumn?: string,
+    search?: {
+      id?: bigint,
+      fatura_numero?: string,
+      mes_referencia?: string,
+      ativa_cpfl_tarifas?: number,
+      ativa_cpfl_valor?: number,
+      extras_cpfl?: number,
+      injetada_tarifas?: number,
+      injetada_valor?: number,
+      kwh_ativa?: number,
+      kwh_injetada?: number,
+      created_at?: string
+    }
+}
+```
+
 # API no Postman
 
 Para acessar as requisições da API diretamente no Postman, clique no link abaixo:
