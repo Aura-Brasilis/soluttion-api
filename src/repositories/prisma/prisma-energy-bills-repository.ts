@@ -10,6 +10,7 @@ export class PrismaEnergyBillsRepository implements EnergyBillsRepository {
         itens_cobranca: true,
         Usuarios: true,
         usinas: true,
+        itens_cobranca2: true,
       },
       where: {
         id: energyBillsId,
@@ -52,6 +53,7 @@ export class PrismaEnergyBillsRepository implements EnergyBillsRepository {
         itens_cobranca: true,
         Usuarios: true,
         usinas: true,
+        itens_cobranca2: true,
       },
       skip,
       take: limit,
