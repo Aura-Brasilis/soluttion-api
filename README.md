@@ -195,6 +195,8 @@ query params:
     orderColumn?: string,
     search?: {
         id?: bigint,
+        id_usuario?: int,
+        id_usina?: int,
         empresa_nome?: string,
         empresa_endereco?: string,
         empresa_cnpj?: string,
@@ -224,6 +226,11 @@ query params:
         leitura_energia_injetada_consumo_kwh?: number,
         contato_telefone?: string,
         contato_site?: string,
+        porcentagem_contratual?: number,
+        informacoes_fatura?: string,
+        pn?: string,
+        pn_mes?: string,
+        tipo?: string,
         created_at?: string
     }
 }
