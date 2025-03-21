@@ -287,4 +287,4 @@ query params:
 
 Para acessar as requisições da API diretamente no Postman, clique no link abaixo:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/join-team?invite_code=bde8fee7f88e7f12aaa0924d3cebbbbedba9921a75748bdda6ec645012d7b26d&target_code=f80b4e90d6f41ffc1766e51e7d4eccf1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/join-team?invite_code=d1daf387d1961546141a1718ee6f0568c534bee47141b9609ef33599324989c5&target_code=919d7f8c5ee7c542f6cbc687179a0d07)
