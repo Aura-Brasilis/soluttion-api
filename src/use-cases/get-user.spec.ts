@@ -27,6 +27,7 @@ describe('Get users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
+      conta_cpfl: 1,
     })
 
     const { user } = await sut.execute({ userId })
@@ -50,6 +51,7 @@ describe('Get users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
+      conta_cpfl: 1,
     })
 
     await expect(() =>

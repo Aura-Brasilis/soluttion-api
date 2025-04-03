@@ -10,4 +10,5 @@ export interface UserSearch {
   responsavel?: string
   cep?: string
   tipo?: string
+  conta_cpfl?: number
 }

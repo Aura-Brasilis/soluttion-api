@@ -17,6 +17,9 @@ export class PrismaUsersRepository implements UsersRepository {
       where: {
         id: userId,
       },
+      include: {
+        contas_cpfl: true,
+      },
     })
 
     return user
@@ -46,6 +49,9 @@ export class PrismaUsersRepository implements UsersRepository {
 
     const users = await prisma.usuarios.findMany({
       where: filters,
+      include: {
+        contas_cpfl: true,
+      },
       skip,
       take: limit,
       orderBy: orderConfig,

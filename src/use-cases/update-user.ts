@@ -15,6 +15,7 @@ interface UpdateUserUseCaseRequest {
     responsavel?: string
     telefone?: string
     tipo?: string
+    contaCpfl?: number
   }
 }
 
@@ -46,6 +47,7 @@ export class UpdateUserUseCase {
       responsavel: data.responsavel,
       telefone: data.telefone,
       tipo: data.tipo,
+      conta_cpfl: data.contaCpfl,
     }
 
     const updatedUser = await this.usersRepository.update(dataToUpdate)
