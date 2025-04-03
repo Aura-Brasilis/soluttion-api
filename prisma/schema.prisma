@@ -13,14 +13,16 @@ model Usuarios {
   nome                                                           String?
   email                                                          String?
   telefone                                                       String?
-  cpf_cnpj                                                       String?
+  cpf_cnpj                                                       String?               @db.VarChar(14)
   razao_social                                                   String?
   investimento                                                   Decimal?              @db.Decimal
   responsavel                                                    String?
   cep                                                            String?
   tipo                                                           String?
+  conta_cpfl                                                     Int?
   ControleFaturamento_ControleFaturamento_id_inquilinoToUsuarios ControleFaturamento[] @relation("ControleFaturamento_id_inquilinoToUsuarios")
   ControleFaturamento_ControleFaturamento_id_usinaToUsuarios     ControleFaturamento[] @relation("ControleFaturamento_id_usinaToUsuarios")
+  contas_cpfl                                                    contas_cpfl?          @relation(fields: [conta_cpfl], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_conta_cpfl")
   faturas_energia                                                faturas_energia[]
   faturas_energia_faturas_energia_id_usinaToUsuarios             faturas_energia[]     @relation("faturas_energia_id_usinaToUsuarios")
 }
@@ -141,4 +143,12 @@ model itens_cobranca2 {
   taxa_adm_gestao                  Decimal?        @db.Decimal(10, 2)
   final_total_receber              Decimal?        @db.Decimal(10, 2)
   faturas_energia                  faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
+}
+
+model contas_cpfl {
+  id       Int        @id @default(autoincrement())
+  email    String     @db.VarChar(255)
+  senha    String     @db.VarChar(255)
+  cpf_cnpj String     @db.VarChar(14)
+  Usuarios Usuarios[]
 }

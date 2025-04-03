@@ -12,6 +12,7 @@ interface CreateUserUseCaseRequest {
   responsavel: string
   telefone: string
   tipo: string
+  contaCpfl: number
 }
 
 interface CreateUserUseCaseResponse {
@@ -32,6 +33,7 @@ export class CreateUserUseCase {
     responsavel,
     telefone,
     tipo,
+    contaCpfl,
   }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
     const user = await this.usersRepository.create({
       cep,
@@ -44,6 +46,9 @@ export class CreateUserUseCase {
       responsavel,
       telefone,
       tipo,
+      contas_cpfl: {
+        connect: { id: contaCpfl },
+      },
     })
 
     return { user }
