@@ -20,8 +20,11 @@ model Usuarios {
   cep                                                            String?
   tipo                                                           String?
   conta_cpfl                                                     Int?
+  inquilino_id                                                   Int?
   ControleFaturamento_ControleFaturamento_id_inquilinoToUsuarios ControleFaturamento[] @relation("ControleFaturamento_id_inquilinoToUsuarios")
   ControleFaturamento_ControleFaturamento_id_usinaToUsuarios     ControleFaturamento[] @relation("ControleFaturamento_id_usinaToUsuarios")
+  Usuarios                                                       Usuarios?             @relation("UsuariosToUsuarios", fields: [inquilino_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_Usuarios                                                 Usuarios[]            @relation("UsuariosToUsuarios")
   contas_cpfl                                                    contas_cpfl?          @relation(fields: [conta_cpfl], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_conta_cpfl")
   faturas_energia                                                faturas_energia[]
   faturas_energia_faturas_energia_id_usinaToUsuarios             faturas_energia[]     @relation("faturas_energia_id_usinaToUsuarios")
@@ -142,6 +145,7 @@ model itens_cobranca2 {
   final_total_cpfl                 Decimal?        @db.Decimal(10, 2)
   taxa_adm_gestao                  Decimal?        @db.Decimal(10, 2)
   final_total_receber              Decimal?        @db.Decimal(10, 2)
+  soma_total_usina                 Decimal?        @db.Decimal(10, 2)
   faturas_energia                  faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
 }
 
