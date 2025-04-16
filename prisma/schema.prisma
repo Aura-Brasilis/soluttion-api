@@ -25,6 +25,8 @@ model Usuarios {
   contas_cpfl                                                    contas_cpfl?          @relation(fields: [conta_cpfl], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_conta_cpfl")
   faturas_energia                                                faturas_energia[]
   faturas_energia_faturas_energia_id_usinaToUsuarios             faturas_energia[]     @relation("faturas_energia_id_usinaToUsuarios")
+  inquilinos                                                     inquilinos_usinas[]   @relation("inquilinos_usinas_inquilino_idToUsuarios")
+  usinas                                                         inquilinos_usinas[]   @relation("inquilinos_usinas_usina_idToUsuarios")
 }
 
 model ControleFaturamento {
@@ -115,7 +117,7 @@ model itens_cobranca {
   fatura_numero       String          @default("NULL") @db.VarChar(255)
   codigo              String?         @default("NULL") @db.VarChar(255)
   descricao           String          @default("NULL") @db.VarChar(255)
-  quantidade_kwh      Int?            @default(0)
+  quantidade_kwh      Decimal?        @default(0) @db.Decimal(10, 4)
   tarifa_com_impostos Decimal?        @default(0) @db.Decimal(10, 4)
   valor               Decimal         @default(0) @db.Decimal(10, 2)
   bandeira            String?         @default("NULL") @db.VarChar(255)
@@ -142,6 +144,7 @@ model itens_cobranca2 {
   final_total_cpfl                 Decimal?        @db.Decimal(10, 2)
   taxa_adm_gestao                  Decimal?        @db.Decimal(10, 2)
   final_total_receber              Decimal?        @db.Decimal(10, 2)
+  soma_total_usina                 Decimal?        @db.Decimal(10, 2)
   faturas_energia                  faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
 }
 
@@ -151,4 +154,13 @@ model contas_cpfl {
   senha    String     @db.VarChar(255)
   cpf_cnpj String     @db.VarChar(14)
   Usuarios Usuarios[]
+}
+
+model inquilinos_usinas {
+  inquilino_id Int
+  usina_id     Int
+  inquilino    Usuarios @relation("inquilinos_usinas_inquilino_idToUsuarios", fields: [inquilino_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  usina        Usuarios @relation("inquilinos_usinas_usina_idToUsuarios", fields: [usina_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([inquilino_id, usina_id])
 }
