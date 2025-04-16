@@ -19,6 +19,18 @@ export class PrismaUsersRepository implements UsersRepository {
       },
       include: {
         contas_cpfl: true,
+        inquilinos: {
+          include: {
+            inquilino: true,
+            usina: true,
+          },
+        },
+        usinas: {
+          include: {
+            inquilino: true,
+            usina: true,
+          },
+        },
       },
     })
 
@@ -51,6 +63,18 @@ export class PrismaUsersRepository implements UsersRepository {
       where: filters,
       include: {
         contas_cpfl: true,
+        inquilinos: {
+          include: {
+            inquilino: true,
+            usina: true,
+          },
+        },
+        usinas: {
+          include: {
+            inquilino: true,
+            usina: true,
+          },
+        },
       },
       skip,
       take: limit,
