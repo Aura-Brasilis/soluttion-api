@@ -14,7 +14,6 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     razaoSocial: z.string(),
     telefone: z.string(),
     cep: z.string(),
-    contaCpfl: z.coerce.number(),
   })
 
   const {
@@ -28,7 +27,6 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     responsavel,
     telefone,
     tipo,
-    contaCpfl,
   } = createBodySchema.parse(req.body)
 
   const createUserUseCase = makeCreateUserUseCase()
@@ -44,7 +42,6 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     responsavel,
     telefone,
     tipo,
-    contaCpfl,
   })
 
   return res.status(200).send({ user })

@@ -26,7 +26,6 @@ describe('List users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     })
 
     usersRepository.items.push({
@@ -41,7 +40,6 @@ describe('List users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     })
 
     const { users } = await sut.execute({
@@ -65,7 +63,6 @@ describe('List users use case', () => {
         responsavel: 'test',
         telefone: '111111111',
         tipo: 'test',
-        conta_cpfl: 1,
       })
     }
 
@@ -91,7 +88,6 @@ describe('List users use case', () => {
         responsavel: `Resp ${i}`,
         telefone: '111111111',
         tipo: `tipo ${i}`,
-        conta_cpfl: 1,
       })
     }
 

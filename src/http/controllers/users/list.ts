@@ -30,7 +30,6 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           responsavel: z.string().optional(),
           cep: z.string().optional(),
           tipo: z.string().optional(),
-          conta_cpfl: z.coerce.number().optional(),
         }),
       )
       .optional(),
