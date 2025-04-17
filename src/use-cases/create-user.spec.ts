@@ -23,7 +23,6 @@ describe('Create users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      contaCpfl: 1,
     })
 
     expect(user.id).toEqual(expect.any(Number))

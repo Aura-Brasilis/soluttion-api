@@ -27,7 +27,6 @@ describe('Remove users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     })
 
     const { success } = await sut.execute({ userId })
@@ -51,7 +50,6 @@ describe('Remove users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     })
 
     await expect(() =>

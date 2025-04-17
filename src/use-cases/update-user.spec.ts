@@ -29,7 +29,6 @@ describe('Update users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     }
 
     usersRepository.items.push(data)
@@ -63,7 +62,6 @@ describe('Update users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     }
 
     const dataToUpdate = {
@@ -78,7 +76,6 @@ describe('Update users use case', () => {
       responsavel: 'test',
       telefone: '111111111',
       tipo: 'test',
-      conta_cpfl: 1,
     }
 
     usersRepository.items.push(dataToCreate)
