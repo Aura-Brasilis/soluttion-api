@@ -18,7 +18,6 @@ export class PrismaUsersRepository implements UsersRepository {
         id: userId,
       },
       include: {
-        contas_cpfl: true,
         inquilinos: {
           include: {
             inquilino: true,
@@ -62,7 +61,6 @@ export class PrismaUsersRepository implements UsersRepository {
     const users = await prisma.usuarios.findMany({
       where: filters,
       include: {
-        contas_cpfl: true,
         inquilinos: {
           include: {
             inquilino: true,
