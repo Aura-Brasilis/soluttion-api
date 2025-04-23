@@ -19,6 +19,8 @@ model Usuarios {
   responsavel                                                    String?
   cep                                                            String?
   tipo                                                           String?
+  porcentagem_contrato                                           Decimal?              @db.Decimal(10, 2)
+  taxa_soluttion                                                 Decimal?              @db.Decimal(10, 2)
   ControleFaturamento_ControleFaturamento_id_inquilinoToUsuarios ControleFaturamento[] @relation("ControleFaturamento_id_inquilinoToUsuarios")
   ControleFaturamento_ControleFaturamento_id_usinaToUsuarios     ControleFaturamento[] @relation("ControleFaturamento_id_usinaToUsuarios")
   faturas_energia                                                faturas_energia[]
