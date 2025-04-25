@@ -3,6 +3,11 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+  PIX_KEY: z.string(),
+  PIX_KEY_TYPE: z.string(),
+  PIX_NAME: z.string(),
+  PIX_CITY: z.string(),
+  QRCODE_PIX_API_URL: z.string(),
   PORT: z.coerce.number().default(3333),
 })
 
