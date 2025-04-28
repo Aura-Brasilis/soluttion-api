@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { QrCodeRepository } from '../qrcode-repository'
+import { GeneratorQrCodeRepository } from '../generator-qrcode-repository'
 import { env } from '@/env'
 
-export class PixQrCodeRepository implements QrCodeRepository {
+export class PixQrCodeRepository implements GeneratorQrCodeRepository {
   async create(amount: string, id: string) {
     try {
       const response = await axios.post(env.QRCODE_PIX_API_URL, {

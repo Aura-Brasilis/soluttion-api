@@ -100,6 +100,7 @@ model faturas_energia {
   historico_consumo                    historico_consumo[]
   itens_cobranca                       itens_cobranca[]
   itens_cobranca2                      itens_cobranca2[]
+  pix_qrcodes                          pix_qrcodes?
 }
 
 model historico_consumo {
@@ -155,4 +156,20 @@ model inquilinos_usinas {
   usina        Usuarios @relation("inquilinos_usinas_usina_idToUsuarios", fields: [usina_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([inquilino_id, usina_id])
+}
+
+model pix_qrcodes {
+  amount          String          @db.VarChar(255)
+  city            String          @db.VarChar(255)
+  code            String          @db.VarChar(255)
+  formated_amount String?         @db.VarChar(255)
+  key             String          @db.VarChar(255)
+  key_type        String          @db.VarChar(255)
+  name            String          @db.VarChar(255)
+  qrcode_base64   String
+  reference       String          @unique(map: "unique_reference") @db.VarChar(255)
+  id              Int             @id @default(autoincrement())
+  created_at      DateTime?       @default(now()) @db.Timestamp(6)
+  renew_at        DateTime        @default(dbgenerated("(now() + '00:30:00'::interval)")) @db.Timestamp(6)
+  faturas_energia faturas_energia @relation(fields: [reference], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_reference")
 }
