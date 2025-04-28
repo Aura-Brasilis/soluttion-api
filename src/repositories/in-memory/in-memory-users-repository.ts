@@ -19,6 +19,8 @@ export class InMemoryUsersRepository implements UsersRepository {
       razao_social: data.razao_social || '',
       telefone: data.telefone || '',
       cep: data.cep || '',
+      porcentagem_contrato: data.porcentagem_contrato || null,
+      taxa_soluttion: data.taxa_soluttion || null,
     }
 
     this.items.push(user)
