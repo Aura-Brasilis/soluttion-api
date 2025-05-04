@@ -36,5 +36,6 @@ export interface EnergyBillsSearch {
   pn?: string
   pn_mes?: string
   tipo?: string
+  operacao_mes?: string
   created_at?: string
 }
