@@ -55,6 +55,7 @@ export async function list(req: FastifyRequest, res: FastifyReply) {
           pn: z.string().optional(),
           pn_mes: z.string().optional(),
           tipo: z.string().optional(),
+          operacao_mes: z.string().optional(),
           informacoes_fatura: z.string().optional(),
           created_at: z.string().optional(),
         }),
