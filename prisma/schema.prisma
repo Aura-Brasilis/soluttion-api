@@ -95,12 +95,13 @@ model faturas_energia {
   pn_mes                               String?             @db.VarChar(255)
   tipo                                 String?             @db.VarChar(255)
   porcentagem_taxa                     Decimal?            @db.Decimal(10, 2)
-  operacao_mes                         String?             @db.VarChar(255)
+  operacao_mes                         String              @db.VarChar(255)
   Usuarios                             Usuarios?           @relation(fields: [id_usuario], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_faturas_usuarios")
   usinas                               Usuarios?           @relation("faturas_energia_id_usinaToUsuarios", fields: [id_usina], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usina")
   historico_consumo                    historico_consumo[]
   itens_cobranca                       itens_cobranca[]
   itens_cobranca2                      itens_cobranca2[]
+  pix_boletos                          pix_boletos?
   pix_qrcodes                          pix_qrcodes?
 }
 
@@ -178,4 +179,14 @@ model pix_qrcodes {
   created_at      DateTime?       @default(now()) @db.Timestamp(6)
   renew_at        DateTime        @default(dbgenerated("(now() + '00:30:00'::interval)")) @db.Timestamp(6)
   faturas_energia faturas_energia @relation(fields: [reference], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_reference")
+}
+
+model pix_boletos {
+  id              Int             @id @default(autoincrement())
+  pix             String?
+  boleto          String?
+  created_at      DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime        @default(now()) @db.Timestamptz(6)
+  fatura_numero   String          @unique(map: "unique_pix_boletos_fatura_numero") @db.VarChar(255)
+  faturas_energia faturas_energia @relation(fields: [fatura_numero], references: [fatura_numero], onDelete: NoAction, onUpdate: NoAction, map: "fk_fatura_numero")
 }
